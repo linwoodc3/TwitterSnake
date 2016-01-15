@@ -1,5 +1,5 @@
 # TwitterSnake
-Repository for those helping or interested in an python-based twitter stream collector hosted on your personal AWS account.
+Repository for those interested in a python-based twitter stream collector hosted on your personal AWS account.
 
 ####Blogs on Twitter API
 * [Collecting real-time Twitter data with the Streaming API](http://badhessian.org/2012/10/collecting-real-time-twitter-data-with-the-streaming-api/)
