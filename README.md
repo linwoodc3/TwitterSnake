@@ -24,4 +24,20 @@ Repository for those interested in a python-based twitter stream collector hoste
   4. Putty (or any SSH client, but this guide uses Putty)
   
 ##Instructions
---TODO
+### :boom: :exclamation: WARNING: Unless you are on AWS "Free-Tier", continuing with this guide **WILL** cause AWS to bill you for the services you use :exclamation: :boom: 
+
+####Set up your AWS Environment through the AWS console
+First things first, we need to set up the environment that will be used to host this application. 
+
+To get started, we need to spin up an EC2 instance. We will be using an Ubuntu image pre-loaded with Anaconda, which you can read about [here](http://docs.continuum.io/anaconda/images#id4). You can follow these steps or, for a more detailed explanation, follow [this guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html?console_help=true)...
+  1. Access your AWS Management Console [here](https://console.aws.amazon.com/console/home?region=us-east-1)
+      * Make sure you log in!
+  2. Select **EC2** from the **Compute** section
+  3. Select **Launch Instance**
+  4. From the lef-hand navigation pane, select **Community AMIs**
+  5. Using the search bar, search for *anaconda* and select Anaconda on Ubuntu from continuum analytics.
+      * It should be named similarly to *anaconda3-2.4.1-on-ubuntu-14.04-lts - ami-1cd89176* 
+  6. Select the **t1.micro** instance type
+  7. [OPTIONAL] From the top navigation bar, select **"6.Configure Security Group"**
+  8. [OPTIONAL] In the security specifications, locate the *Source* column and change the selection to **My IP**
+  9. Launch your new instance!
