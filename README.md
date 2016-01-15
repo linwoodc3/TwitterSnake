@@ -26,18 +26,26 @@ Repository for those interested in a python-based twitter stream collector hoste
 ##Instructions
 ### :boom: :exclamation: WARNING: Unless you are on AWS "Free-Tier", continuing with this guide **WILL** cause AWS to bill you for the services you use :exclamation: :boom: 
 
-####Set up your AWS Environment through the AWS console
+####Set up your AWS Environment through the AWS Management Console
 First things first, we need to set up the environment that will be used to host this application. 
 
-To get started, we need to spin up an EC2 instance. We will be using an Ubuntu image pre-loaded with Anaconda, which you can read about [here](http://docs.continuum.io/anaconda/images#id4). You can follow these steps or, for a more detailed explanation, follow [this guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html?console_help=true)...
+To get started, we need to spin up an EC2 (Elastic Cloud Compute) instance. We will be using an Ubuntu image pre-loaded with Anaconda, which you can read about [here](http://docs.continuum.io/anaconda/images#id4). You can follow these steps or, for a more detailed explanation, follow [this guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html?console_help=true)...
   1. Access your AWS Management Console [here](https://console.aws.amazon.com/console/home?region=us-east-1)
       * Make sure you log in!
   2. Select **EC2** from the **Compute** section
   3. Select **Launch Instance**
-  4. From the lef-hand navigation pane, select **Community AMIs**
+  4. From the left-hand navigation pane, select **Community AMIs**
   5. Using the search bar, search for *anaconda* and select Anaconda on Ubuntu from continuum analytics.
       * It should be named similarly to *anaconda3-2.4.1-on-ubuntu-14.04-lts - ami-1cd89176* 
   6. Select the **t1.micro** instance type
   7. [OPTIONAL] From the top navigation bar, select **"6.Configure Security Group"**
   8. [OPTIONAL] In the security specifications, locate the *Source* column and change the selection to **My IP**
   9. Launch your new instance!
+  
+Now, we will create the S3 (Simple Storage Solution) bucket to store our collected tweets. You'll need to navigate back to your Management Console [here](https://console.aws.amazon.com/console/home?region=us-east-1).
+  1. Select **S3** from the **Storage & Content Deliver** section
+  2. Select **Create Bucket**
+  3. Name your bucket something fun (and useful)
+  4. Select your region (to optimize for latency)
+  5. [OPTIONAL] Set up logging. You won't really need this for the purpose of this guide.
+  6. Create your bucket!
