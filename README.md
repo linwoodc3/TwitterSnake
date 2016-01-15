@@ -41,7 +41,7 @@ To get started, we need to spin up an EC2 (Elastic Cloud Compute) instance. We w
   7. [OPTIONAL] From the top navigation bar, select **"6.Configure Security Group"**
   8. [OPTIONAL] In the security specifications, locate the *Source* column and change the selection to **My IP**
   9. Launch your new instance!
-  10. - [ ] TODO://Create security group and open necesarry ports, then attach to EC2 instance
+  10. - [ ] :exclamation: TODO://Create security group and open necesarry ports, then attach to EC2 instance :exclamation: 
   
 Now, we will create the S3 (Simple Storage Solution) bucket to store our collected tweets. You'll need to navigate back to your Management Console [here](https://console.aws.amazon.com/console/home?region=us-east-1).
   1. Select **S3** from the **Storage & Content Deliver** section
@@ -66,8 +66,8 @@ Finally, we need to create an IAM (Identity & Access Management) User so your py
   12. The only resource we will need to access is your S3 bucket, so search for the **AmazonS3FullAccess** policy and **attach it**
   13. You're done!
 
-- [ ] TODO:// Set up putty to SSH into EC2 instance
-- [ ] TODO:// Set up your anaconda envinronment
-- [ ] TODO:// Set up AWS CLI on EC2 instance
-- [ ] TODO:// Create python files
-- [ ] TODO:// Explain running with nohup and how to kill if necesarry
+- [ ]  :exclamation: TODO:// Set up putty to SSH into EC2 instance :exclamation: 
+- [ ]  :exclamation: TODO:// Set up your anaconda envinronment :exclamation: 
+- [ ]  :exclamation: TODO:// Set up AWS CLI on EC2 instance :exclamation: 
+- [ ]  :exclamation: TODO:// Create python files :exclamation: 
+- [ ]  :exclamation: TODO:// Explain running with nohup and how to kill if necesarry :exclamation: 
