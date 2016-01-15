@@ -1,8 +1,9 @@
+#Import twitter api packages
 from tweepy.streaming import StreamListener
-from tweepy import OAuthHandler
-from tweepy import Stream
-import boto3
-import botocore
+from tweepy import OAuthHandler, Stream
+#Import AWS SDKs
+import boto3, botocore
+#Import standard packages
 import json, time, sys, os
 
 #Write the access tokens and consumer tokens from your Twitter Appliation in these fields
@@ -66,6 +67,8 @@ class StdListener(StreamListener):
 		self.output.write(status + "\n")
 
 		self.counter += 1
+		if (self.counter%200==0):
+			print(self.counter)
 		if self.counter >= 20000:
 			self.output.close()
 			self.s3.meta.client.upload_file(self.fileName,'twitterharvestdctweets',self.fileName)
@@ -82,9 +85,11 @@ class StdListener(StreamListener):
 		return
 
 	def on_limit(self, track):
+		#sys.stderr.write("Rate limit on " + track + " tweets\n")
 		raise RateLimit(track)
 
 	def on_error(self, status_code):
+		#sys.stderr.write('Error: ' + str(status_code) + "\n")
 		raise HttpErr(status_code)
 		return False
 
@@ -117,7 +122,7 @@ if __name__ == '__main__':
 			time.sleep(backoff_rate_limit)
 			backoff_rate_limit *= 2
 		except HttpErr as e:
-			print('Http Error: ' + str(status_code) + "\n")
+			print('Http Error: ' + str(e.value) + "\n")
 			print("Waiting {0} secs...".format(backoff_http_error))
 			time.sleep(backoff_http_error)
 			backoff_http_error = min(backoff_gttp_error * 2, 320)
