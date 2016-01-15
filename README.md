@@ -49,3 +49,19 @@ Now, we will create the S3 (Simple Storage Solution) bucket to store our collect
   4. Select your region (to optimize for latency)
   5. [OPTIONAL] Set up logging. You won't really need this for the purpose of this guide.
   6. Create your bucket!
+  
+Finally, we need to create an IAM (Identity & Access Management) User so your python program can access your AWS resources. As usual, you'll need to navigate back to your Management Console [here](https://console.aws.amazon.com/console/home?region=us-east-1).
+  1. Select **Identity & Access Management** from the **Security and Identity** section
+  2. Select **Users** from the left-hand navigation pane
+  3. Select **Create New Users**
+  4. Name your user something useful (and fun)
+  5. Make sure to check the box for the option to **Generate an Access Key for each user**
+  6. Select **Create**
+  7. Make sure to **download your credentials** from this page and save them somewhere you'll remember... you'll need these later
+  8. Now select **close** to close the page (you have to press the button twice)
+  9. Now that your back to your **Users** window, select the user you just created by clicking on the name
+  10. Select the **Permissions** tab
+  11. Select **Attach Policy**
+  12. The only resource we will need to access is your S3 bucket, so search for the **AmazonS3FullAccess** policy and **attach it**
+  13. You're done!
+
