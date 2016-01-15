@@ -125,7 +125,7 @@ if __name__ == '__main__':
 			print('Http Error: ' + str(e.value) + "\n")
 			print("Waiting {0} secs...".format(backoff_http_error))
 			time.sleep(backoff_http_error)
-			backoff_http_error = min(backoff_gttp_error * 2, 320)
+			backoff_http_error = min(backoff_http_error * 2, 320)
 		except:
 			#Network error, linear back off
 			print("Waiting {0} seconds before reconnect".format(backoff_network_error))
