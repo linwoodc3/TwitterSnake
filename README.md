@@ -78,8 +78,8 @@ Finally, we need to create an IAM (Identity & Access Management) User so your py
 ####Set up putty in order to SSH into EC2 instance
   In order to connect to your EC2 instance, please follow [this guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html)
   
-####Set up your anaconda envinronment
-   Once you're inside of your EC2 instance, you'll be in control of a simple Ubuntu machine with Anaconda pre-installed. Through these instructions, you'll be able to develop a simple python program to connect to the twitter streaming api
+####Set up your Conda envinronment
+   Once you're inside of your EC2 instance, you'll be in control of a simple Ubuntu machine with Anaconda pre-installed. Through these instructions, you'll be able to develop a simple python program to connect to the twitter streaming api. You can read about using Conda [here](http://conda.pydata.org/docs/using/index.html)
    1. Run the command **conda create --name `<name of your environment>`**
    2. Run the command __source activate `<name of your environment>`__
    3. Now that you're in your environment, you can install some packages that Anaconda does not include
@@ -89,6 +89,33 @@ Finally, we need to create an IAM (Identity & Access Management) User so your py
    7. Run the command **pip install tweepy**
    8. Now, you should have all of the packages that you need in your conda environment
 
-- [ ]  :exclamation: TODO:// Set up AWS CLI on EC2 instance :exclamation: 
-- [ ]  :exclamation: TODO:// Create python files :exclamation: 
-- [ ]  :exclamation: TODO:// Explain running with nohup and how to kill if necesarry :exclamation: 
+####Configure up AWS CLI on EC2 instance
+  You should configure AWS CLI in this environment in case you want to manage your AWS resources from here; you also need to in order to use the boto3 from a python script. You can read about configuring AWS CLI [here](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html), but I'll provide a simple guide as well to get you up and running.
+  1. From the command line, execute **aws configure**
+  2. Remember those credentials you downloaded in step 7 of setting up your IAM user? You need those now! Find the file and open it
+  3. Enter the access key and secret key which are provided in your IAM user credential file, and then type in your default region name (us-east-1, for example)
+  4. You don't need to enter anything for Default Output Format, juts hit **Enter**
+  5. Your AWS CLI is now configured!
+
+####Create python files
+  For simplicity's sake, you can simply fetch **TwitFarm.py** from this repository, and it should be able to run in the environment that you have defined. Of course, you can always make your own, better program using the resources you've collected and installed on this EC2 instance. You're ready to do whatever you want! (with python, tweepy, and AWS at least). 
+  * If you would like to run TwitFarm.py, please read the section below about running using the UNIX command nohup so you're educated about how to run this python script in the background.
+  
+####Explain running with nohup and how to kill if necesarry
+  * If you want to skip the boring explanations, run these commands
+      * `nohup python -u TwitFarm.py` to start your python job in the background
+      * `tail -f nohup.out` to monitor any output from the script
+      * `kill -9 <pid>` to kill the process
+  
+  Wouldn't it be nice if you could just run this process without having to keep your SSH instance alive? Well, you can do that pretty simply! We'll make use of the **nohup** command it order to do that. Here's a quick explanation:
+  * The nohup command allows you to run a script that ignores the signal sent when you terminate your terminal instance. Most jobs will end when you kill the terminal that started them, but not a job run with nohup!
+  * It may become necesarry to kill the job you started with nohup; things do happen. You'll need to use the **kill** command to do this. All you need to kill it is the PID (process identifier). To find that, run this command: `ps aux | grep <username>`
+      * If you've followed this guide, your username will simple be **ubuntu**
+  * The process you'll be looking for will have this (or a similar) command in the right-most column: `python TwitFarm.py`
+    * The PID will be the second column from your `ps` command, right after your username.
+  Now, normally you woudln't have to use any special commands to kill a process. A simple `kill <pid>` would do the job... but that is not the case when you start a job with `nohup`. `Kill` normally kills a job using the very signal that `nohup` ignores, so you need to specify `kill -9 <pid>` to properly kill this job. 
+
+  So, we know how to start the job, and we know how to end the job. What about monitoring it, though? That's fairly easy as well. `nohup` by default appends all output to the file **nohup.out**. In order to continuously monitor this, we can run a simple `tail` command using the file flag, i.e. `tail -f nohup.out'. This will give you a continous stream of the script output in your terminal window. 
+  
+  **HOWEVER** this will not work if, to start the job, you ran `nohup python TwitFarm.py`. Why is that? It's because python uses a buffered output and, without going to far into what that means, it won't write anything to the output file unless you flush stdout periodically. We can get around this, however, by running python in unbuffered mode. You simply need to pass the `-u` flag when running python to do this, which gives us the end result of `nohup python -u TwitFarm.py`. Now, you can successfully view any output from the script with the `tail -f` command. Enjoy!
+  * If you run the commands as specified, you can close your SSH instance now and you'll be collecting tweets on the EC2 instance indefinitely (unless the program, or EC2 instance,  crashes). 
