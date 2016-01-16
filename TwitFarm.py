@@ -65,19 +65,17 @@ class StdListener(StreamListener):
 
 	def on_status(self, status):
 		self.output.write(status + "\n")
-
 		self.counter += 1
 		if (self.counter%200==0):
 			print(self.counter)
 		if self.counter >= 20000:
 			self.output.close()
-			self.s3.meta.client.upload_file(self.fileName,'twitterharvestdctweets',self.fileName)
+			self.s3.meta.client.upload_file(self.fileName,'',self.fileName)
 			#Once uploaded to S3, delete the file locally
 			os.remove(self.filename)
 			self.fileName = fprefix+'.'+time.strftime('%Y%m%d-%H%M%S')+'.json'
 			self.output = open(self.fileName, 'w') 
 			self.counter = 0
-
 		return
 
 	def on_delete(self, status_id, user_id):
@@ -128,7 +126,8 @@ if __name__ == '__main__':
 			backoff_http_error = min(backoff_http_error * 2, 320)
 		except:
 			#Network error, linear back off
-			print("Waiting {0} seconds before reconnect".format(backoff_network_error))
+			e = sys.exc_info()[0]
+			print("Error: {0} : Waiting {1} seconds before reconnect".format(e,backoff_network_error))
 			time.sleep(backoff_network_error)
 			backoff_network_error = min(backoff_network_error + 1, 16)
 			continue
