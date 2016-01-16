@@ -38,10 +38,20 @@ To get started, we need to spin up an EC2 (Elastic Cloud Compute) instance. We w
   5. Using the search bar, search for *anaconda* and select Anaconda on Ubuntu from continuum analytics.
       * It should be named similarly to *anaconda3-2.4.1-on-ubuntu-14.04-lts - ami-1cd89176* 
   6. Select the **t1.micro** instance type
-  7. [OPTIONAL] From the top navigation bar, select **"6.Configure Security Group"**
-  8. [OPTIONAL] In the security specifications, locate the *Source* column and change the selection to **My IP**
   9. Launch your new instance!
-  10. - [ ] :exclamation: TODO://Create security group and open necesarry ports, then attach to EC2 instance :exclamation: 
+  10. From the main EC2 management page, find the **Network & Security** section, and select **Security Groups**
+  11. Select **Create new security group**
+  12. Name your security group something meaningful, add a description (if you want), and leave the VPC as it defaults
+  13. In the **Inbound** tab, select **Add Rule**
+  14. For the type, select **HTTP**
+  15. Select **Add a rule** again, and select **SSH** as the type
+  16. For the source, select **My IP** if you only want to allow connection from your current IP address, or enter a custom IP address (that you have access too, obviously)
+  17. Select the **Outbound** tab
+  18. You'll notice **All traffic** already added; this is okay, leave it.
+  19. Select **Add a rule**, then select **HTTPS** as the type. 
+      * This is required so that your EC2 instance can communicate with your S3 bucket
+  20. Select **Create**
+  21. Now your done! Your EC2 instance is spun up and ready to go!
   
 Now, we will create the S3 (Simple Storage Solution) bucket to store our collected tweets. You'll need to navigate back to your Management Console [here](https://console.aws.amazon.com/console/home?region=us-east-1).
   1. Select **S3** from the **Storage & Content Deliver** section
