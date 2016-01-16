@@ -80,8 +80,8 @@ Finally, we need to create an IAM (Identity & Access Management) User so your py
   
 ####Set up your anaconda envinronment
    Once you're inside of your EC2 instance, you'll be in control of a simple Ubuntu machine with Anaconda pre-installed. Through these instructions, you'll be able to develop a simple python program to connect to the twitter streaming api
-   1. Run the command **conda create --name <name of your envirnment> **
-   2. Run the command **source activate <name of your environment> **
+   1. Run the command **conda create --name `<name of your environment>`**
+   2. Run the command __source activate `<name of your environment>`__
    3. Now that you're in your environment, you can install some packages that Anaconda does not include
    4. Run the command **pip install boto3**
    5. Run the command **pip install awscli**
