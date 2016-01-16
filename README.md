@@ -98,7 +98,35 @@ Finally, we need to create an IAM (Identity & Access Management) User so your py
   5. Your AWS CLI is now configured!
 
 ####Create python files
-  For simplicity's sake, you can simply fetch **TwitFarm.py** from this repository, and it should be able to run in the environment that you have defined. Of course, you can always make your own, better program using the resources you've collected and installed on this EC2 instance. You're ready to do whatever you want! (with python, tweepy, and AWS at least). 
+  For simplicity's sake, you can simply fetch **TwitFarm.py** from this repository, and it should be able to run in the environment that you have defined (with the changes defined below). Of course, you can always make your own, better program using the resources you've collected and installed on this EC2 instance. You're ready to do whatever you want! (with python, tweepy, and AWS at least). 
+  * To run TwitFarm.py, you need to make the following changed before running it.
+  * You need to add in your own Twitter API consumer and access keys in the following section. You'll find these in your twitter developer profile.
+  
+  ```python
+  #Write the access tokens and consumer tokens from your Twitter Appliation in these fields
+  access_token = ""
+  access_token_secret = ""
+  consumer_key = ""
+  consumer_secret = ""
+  ```
+  * In the following code sectiond, change the second argument of `self.s3.meta.client.upload_file(self.fileName,'',self.fileName)` to your own S3 bucket's name.
+
+  ```python 
+  def on_status(self, status):
+  self.output.write(status + "\n")
+	self.counter += 1
+	if (self.counter%200==0):
+		print(self.counter)
+	if self.counter >= 20000:
+		self.output.close()
+		self.s3.meta.client.upload_file(self.fileName,'',self.fileName) # CHANGE THIS LINE
+		#Once uploaded to S3, delete the file locally
+		os.remove(self.filename)
+		self.fileName = fprefix+'.'+time.strftime('%Y%m%d-%H%M%S')+'.json'
+		self.output = open(self.fileName, 'w') 
+		self.counter = 0
+	return
+	```
   * If you would like to run TwitFarm.py, please read the section below about running using the UNIX command nohup so you're educated about how to run this python script in the background.
   
 ####Explain running with nohup and how to kill if necesarry
