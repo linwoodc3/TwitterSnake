@@ -103,7 +103,7 @@ Finally, we need to create an IAM (Identity & Access Management) User so your py
   
 ####Explain running with nohup and how to kill if necesarry
   * If you want to skip the boring explanations, run these commands
-      * `nohup python -u TwitFarm.py` to start your python job in the background
+      * `nohup python -u TwitFarm.py` to start your python job in the background. You can close your SSH instance now and the job will still be running.
       * `tail -f nohup.out` to monitor any output from the script
       * `kill -9 <pid>` to kill the process
   
