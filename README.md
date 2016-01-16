@@ -3,7 +3,6 @@ Repository for those interested in a python-based twitter stream collector hoste
 
 ####Blogs on Twitter API
 * [Collecting real-time Twitter data with the Streaming API](http://badhessian.org/2012/10/collecting-real-time-twitter-data-with-the-streaming-api/)
-
 * [An Introduction to Text Mining using Twitter Streaming API and Python](http://adilmoujahid.com/posts/2014/07/twitter-analytics/)
 * [Consuming Twitter’s Streaming API using Python and cURL](http://www.arngarden.com/2012/11/07/consuming-twitters-streaming-api-using-python-and-curl/)
 
@@ -49,7 +48,7 @@ To get started, we need to spin up an EC2 (Elastic Cloud Compute) instance. We w
   17. Select the **Outbound** tab
   18. You'll notice **All traffic** already added; this is okay, leave it.
   19. Select **Add a rule**, then select **HTTPS** as the type. 
-      * This is required so that your EC2 instance can communicate with your S3 bucket
+      * This is required so that your EC2 instance can communicate using AWS CLI
   20. Select **Create**
   21. Now your done! Your EC2 instance is spun up and ready to go!
   
@@ -76,8 +75,20 @@ Finally, we need to create an IAM (Identity & Access Management) User so your py
   12. The only resource we will need to access is your S3 bucket, so search for the **AmazonS3FullAccess** policy and **attach it**
   13. You're done!
 
-- [ ]  :exclamation: TODO:// Set up putty to SSH into EC2 instance :exclamation: 
-- [ ]  :exclamation: TODO:// Set up your anaconda envinronment :exclamation: 
+####Set up putty in order to SSH into EC2 instance
+  In order to connect to your EC2 instance, please follow [this guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html)
+  
+####Set up your anaconda envinronment
+   Once you're inside of your EC2 instance, you'll be in control of a simple Ubuntu machine with Anaconda pre-installed. Through these instructions, you'll be able to develop a simple python program to connect to the twitter streaming api
+   1. Run the command **conda create --name <name of your envirnment> **
+   2. Run the command **source activate <name of your environment> **
+   3. Now that you're in your environment, you can install some packages that Anaconda does not include
+   4. Run the command **pip install boto3**
+   5. Run the command **pip install awscli**
+   6. Run the command **pip install botocore**
+   7. Run the command **pip install tweepy**
+   8. Now, you should have all of the packages that you need in your conda environment
+
 - [ ]  :exclamation: TODO:// Set up AWS CLI on EC2 instance :exclamation: 
 - [ ]  :exclamation: TODO:// Create python files :exclamation: 
 - [ ]  :exclamation: TODO:// Explain running with nohup and how to kill if necesarry :exclamation: 
