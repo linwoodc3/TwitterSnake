@@ -3,7 +3,6 @@ Repository for those interested in a python-based twitter stream collector hoste
 
 ####Blogs on Twitter API
 * [Collecting real-time Twitter data with the Streaming API](http://badhessian.org/2012/10/collecting-real-time-twitter-data-with-the-streaming-api/)
-
 * [An Introduction to Text Mining using Twitter Streaming API and Python](http://adilmoujahid.com/posts/2014/07/twitter-analytics/)
 * [Consuming Twitter’s Streaming API using Python and cURL](http://www.arngarden.com/2012/11/07/consuming-twitters-streaming-api-using-python-and-curl/)
 
@@ -38,10 +37,20 @@ To get started, we need to spin up an EC2 (Elastic Cloud Compute) instance. We w
   5. Using the search bar, search for *anaconda* and select Anaconda on Ubuntu from continuum analytics.
       * It should be named similarly to *anaconda3-2.4.1-on-ubuntu-14.04-lts - ami-1cd89176* 
   6. Select the **t1.micro** instance type
-  7. [OPTIONAL] From the top navigation bar, select **"6.Configure Security Group"**
-  8. [OPTIONAL] In the security specifications, locate the *Source* column and change the selection to **My IP**
   9. Launch your new instance!
-  10. - [ ] :exclamation: TODO://Create security group and open necesarry ports, then attach to EC2 instance :exclamation: 
+  10. From the main EC2 management page, find the **Network & Security** section, and select **Security Groups**
+  11. Select **Create new security group**
+  12. Name your security group something meaningful, add a description (if you want), and leave the VPC as it defaults
+  13. In the **Inbound** tab, select **Add Rule**
+  14. For the type, select **HTTP**
+  15. Select **Add a rule** again, and select **SSH** as the type
+  16. For the source, select **My IP** if you only want to allow connection from your current IP address, or enter a custom IP address (that you have access too, obviously)
+  17. Select the **Outbound** tab
+  18. You'll notice **All traffic** already added; this is okay, leave it.
+  19. Select **Add a rule**, then select **HTTPS** as the type. 
+      * This is required so that your EC2 instance can communicate using AWS CLI
+  20. Select **Create**
+  21. Now your done! Your EC2 instance is spun up and ready to go!
   
 Now, we will create the S3 (Simple Storage Solution) bucket to store our collected tweets. You'll need to navigate back to your Management Console [here](https://console.aws.amazon.com/console/home?region=us-east-1).
   1. Select **S3** from the **Storage & Content Deliver** section
@@ -66,8 +75,47 @@ Finally, we need to create an IAM (Identity & Access Management) User so your py
   12. The only resource we will need to access is your S3 bucket, so search for the **AmazonS3FullAccess** policy and **attach it**
   13. You're done!
 
-- [ ]  :exclamation: TODO:// Set up putty to SSH into EC2 instance :exclamation: 
-- [ ]  :exclamation: TODO:// Set up your anaconda envinronment :exclamation: 
-- [ ]  :exclamation: TODO:// Set up AWS CLI on EC2 instance :exclamation: 
-- [ ]  :exclamation: TODO:// Create python files :exclamation: 
-- [ ]  :exclamation: TODO:// Explain running with nohup and how to kill if necesarry :exclamation: 
+####Set up putty in order to SSH into EC2 instance
+  In order to connect to your EC2 instance, please follow [this guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html)
+  
+####Set up your Conda envinronment
+   Once you're inside of your EC2 instance, you'll be in control of a simple Ubuntu machine with Anaconda pre-installed. Through these instructions, you'll be able to develop a simple python program to connect to the twitter streaming api. You can read about using Conda [here](http://conda.pydata.org/docs/using/index.html)
+   1. Run the command **conda create --name `<name of your environment>`**
+   2. Run the command __source activate `<name of your environment>`__
+   3. Now that you're in your environment, you can install some packages that Anaconda does not include
+   4. Run the command **pip install boto3**
+   5. Run the command **pip install awscli**
+   6. Run the command **pip install botocore**
+   7. Run the command **pip install tweepy**
+   8. Now, you should have all of the packages that you need in your conda environment
+
+####Configure up AWS CLI on EC2 instance
+  You should configure AWS CLI in this environment in case you want to manage your AWS resources from here; you also need to in order to use the boto3 from a python script. You can read about configuring AWS CLI [here](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html), but I'll provide a simple guide as well to get you up and running.
+  1. From the command line, execute **aws configure**
+  2. Remember those credentials you downloaded in step 7 of setting up your IAM user? You need those now! Find the file and open it
+  3. Enter the access key and secret key which are provided in your IAM user credential file, and then type in your default region name (us-east-1, for example)
+  4. You don't need to enter anything for Default Output Format, juts hit **Enter**
+  5. Your AWS CLI is now configured!
+
+####Create python files
+  For simplicity's sake, you can simply fetch **TwitFarm.py** from this repository, and it should be able to run in the environment that you have defined. Of course, you can always make your own, better program using the resources you've collected and installed on this EC2 instance. You're ready to do whatever you want! (with python, tweepy, and AWS at least). 
+  * If you would like to run TwitFarm.py, please read the section below about running using the UNIX command nohup so you're educated about how to run this python script in the background.
+  
+####Explain running with nohup and how to kill if necesarry
+  * If you want to skip the boring explanations, run these commands
+      * `nohup python -u TwitFarm.py` to start your python job in the background. You can close your SSH instance now and the job will still be running.
+      * `tail -f nohup.out` to monitor any output from the script
+      * `kill -9 <pid>` to kill the process
+  
+  Wouldn't it be nice if you could just run this process without having to keep your SSH instance alive? Well, you can do that pretty simply! We'll make use of the **nohup** command it order to do that. Here's a quick explanation:
+  * The nohup command allows you to run a script that ignores the signal sent when you terminate your terminal instance. Most jobs will end when you kill the terminal that started them, but not a job run with nohup!
+  * It may become necesarry to kill the job you started with nohup; things do happen. You'll need to use the **kill** command to do this. All you need to kill it is the PID (process identifier). To find that, run this command: `ps aux | grep <username>`
+      * If you've followed this guide, your username will simple be **ubuntu**
+  * The process you'll be looking for will have this (or a similar) command in the right-most column: `python TwitFarm.py`
+    * The PID will be the second column from your `ps` command, right after your username.
+  Now, normally you woudln't have to use any special commands to kill a process. A simple `kill <pid>` would do the job... but that is not the case when you start a job with `nohup`. `Kill` normally kills a job using the very signal that `nohup` ignores, so you need to specify `kill -9 <pid>` to properly kill this job. 
+
+  So, we know how to start the job, and we know how to end the job. What about monitoring it, though? That's fairly easy as well. `nohup` by default appends all output to the file **nohup.out**. In order to continuously monitor this, we can run a simple `tail` command using the file flag, i.e. `tail -f nohup.out'. This will give you a continous stream of the script output in your terminal window. 
+  
+  **HOWEVER** this will not work if, to start the job, you ran `nohup python TwitFarm.py`. Why is that? It's because python uses a buffered output and, without going to far into what that means, it won't write anything to the output file unless you flush stdout periodically. We can get around this, however, by running python in unbuffered mode. You simply need to pass the `-u` flag when running python to do this, which gives us the end result of `nohup python -u TwitFarm.py`. Now, you can successfully view any output from the script with the `tail -f` command. Enjoy!
+  * If you run the commands as specified, you can close your SSH instance now and you'll be collecting tweets on the EC2 instance indefinitely (unless the program, or EC2 instance,  crashes). 
