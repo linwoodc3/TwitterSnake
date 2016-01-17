@@ -153,7 +153,13 @@ Here are some instructions for Windows and Mac/Linux users separately.
   We're almost ready to pull Twitter data.  We cover more administrative tasks below:  
   
 ####Create python files
-  For simplicity's sake, you can simply fetch **TwitFarm.py** from this repository, and it should be able to run in the environment that you have defined (with the changes defined below). Of course, you can always make your own, better program using the resources you've collected and installed on this EC2 instance. You're ready to do whatever you want! (with python, tweepy, and AWS at least). 
+  For simplicity's sake, you can simply fetch **TwitFarm.py** from this repository, and it should be able to run in the environment that you have defined (with the changes defined below). To run the file, you would simply type this in your SSH client, that is connected to your EC2 instance:
+  
+  ```python
+  # if you run this BEFORE changes below, you will get 401 error; you need to input your Twitter keys
+  python TwitFarm.py
+  ```
+  Of course, you can always make your own, better program using the resources you've collected and installed on this EC2 instance. You're ready to do whatever you want! (with python, tweepy, and AWS at least). 
   * To run TwitFarm.py, you need to make the following changed before running it.
   * You need to add in your own Twitter API consumer and access keys in the following section. You'll find these in your twitter developer profile.
   * To add your credentials, in your prompt type:
