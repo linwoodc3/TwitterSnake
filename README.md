@@ -95,7 +95,8 @@ Finally, we need to create an IAM (Identity & Access Management) User so your py
            [-Q cipher | cipher-auth | mac | kex | key]
            [-R [bind_address:]port:host:hostport] [-S ctl_path] [-W host:port]
            [-w local_tun[:remote_tun]] [user@]hostname [command]
-           ```
+    ```
+    
 ####FOR UNIX (MAC or LINUX): SSH into your EC2 instance from the Terminal command line
   In order to connect to your EC2 instance from a UNIX system, please follow [this guide](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html)
 	
