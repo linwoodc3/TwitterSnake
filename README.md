@@ -136,7 +136,7 @@ Finally, we need to create an IAM (Identity & Access Management) User so your py
   consumer_key = ""
   consumer_secret = ""
   ```
-  * In the following code sectiond, change the second argument of `self.s3.meta.client.upload_file(self.fileName,'',self.fileName)` to your own S3 bucket's name.
+  * In the following code section, change the second argument of `self.s3.meta.client.upload_file(self.fileName,'',self.fileName)` to your own S3 bucket's name.
 
   ```python 
   def on_status(self, status):
