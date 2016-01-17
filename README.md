@@ -37,7 +37,9 @@ To get started, we need to spin up an EC2 (Elastic Cloud Compute) instance. We w
   5. Using the search bar, search for *anaconda* and select Anaconda on Ubuntu from continuum analytics.
       * It should be named similarly to *anaconda3-2.4.1-on-ubuntu-14.04-lts - ami-1cd89176* 
   6. Select the **t1.micro** instance type
-  9. Launch your new instance!
+  7. Select the **Review and Launch** button
+  8. On this screen, you'll see a warning about improving your instance's security; ignore this for now. 
+  9. Select the **Launch** button. You've created your instance!
   10. From the main EC2 management page, find the **Network & Security** section, and select **Security Groups**
   11. Select **Create new security group**
   12. Name your security group something meaningful, add a description (if you want), and leave the VPC as it defaults
@@ -75,9 +77,12 @@ Finally, we need to create an IAM (Identity & Access Management) User so your py
   12. The only resource we will need to access is your S3 bucket, so search for the **AmazonS3FullAccess** policy and **attach it**
   13. You're done!
 
-####Set up putty in order to SSH into EC2 instance
-  In order to connect to your EC2 instance, please follow [this guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html)
+####FOR WINDOWS: Set up putty in order to SSH into EC2 instance
+  In order to connect to your EC2 instance from a windows system, please follow [this guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html)
   
+####FOR UNIX (MAC or LINUX): SSH into your EC2 instance from the Terminal command line
+  In order to connect to your EC2 instance from a UNIX system, please follow [this guide](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html)
+	
 ####Set up your Conda envinronment
    Once you're inside of your EC2 instance, you'll be in control of a simple Ubuntu machine with Anaconda pre-installed. Through these instructions, you'll be able to develop a simple python program to connect to the twitter streaming api. You can read about using Conda [here](http://conda.pydata.org/docs/using/index.html)
    1. Run the command **conda create --name `<name of your environment>`**
@@ -98,7 +103,35 @@ Finally, we need to create an IAM (Identity & Access Management) User so your py
   5. Your AWS CLI is now configured!
 
 ####Create python files
-  For simplicity's sake, you can simply fetch **TwitFarm.py** from this repository, and it should be able to run in the environment that you have defined. Of course, you can always make your own, better program using the resources you've collected and installed on this EC2 instance. You're ready to do whatever you want! (with python, tweepy, and AWS at least). 
+  For simplicity's sake, you can simply fetch **TwitFarm.py** from this repository, and it should be able to run in the environment that you have defined (with the changes defined below). Of course, you can always make your own, better program using the resources you've collected and installed on this EC2 instance. You're ready to do whatever you want! (with python, tweepy, and AWS at least). 
+  * To run TwitFarm.py, you need to make the following changed before running it.
+  * You need to add in your own Twitter API consumer and access keys in the following section. You'll find these in your twitter developer profile.
+  
+  ```python
+  #Write the access tokens and consumer tokens from your Twitter Appliation in these fields
+  access_token = ""
+  access_token_secret = ""
+  consumer_key = ""
+  consumer_secret = ""
+  ```
+  * In the following code sectiond, change the second argument of `self.s3.meta.client.upload_file(self.fileName,'',self.fileName)` to your own S3 bucket's name.
+
+  ```python 
+  def on_status(self, status):
+  self.output.write(status + "\n")
+	self.counter += 1
+	if (self.counter%200==0):
+		print(self.counter)
+	if self.counter >= 20000:
+		self.output.close()
+		self.s3.meta.client.upload_file(self.fileName,'',self.fileName) # CHANGE THIS LINE
+		#Once uploaded to S3, delete the file locally
+		os.remove(self.filename)
+		self.fileName = fprefix+'.'+time.strftime('%Y%m%d-%H%M%S')+'.json'
+		self.output = open(self.fileName, 'w') 
+		self.counter = 0
+	return
+	```
   * If you would like to run TwitFarm.py, please read the section below about running using the UNIX command nohup so you're educated about how to run this python script in the background.
   
 ####Explain running with nohup and how to kill if necesarry
