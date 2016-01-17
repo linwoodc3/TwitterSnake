@@ -77,11 +77,24 @@ Finally, we need to create an IAM (Identity & Access Management) User so your py
   12. The only resource we will need to access is your S3 bucket, so search for the **AmazonS3FullAccess** policy and **attach it**
   13. You're done!
 
-####FOR WINDOWS: Set up putty in order to SSH into EC2 instance
+#### Connecting to your EC2 Instance (different for Windows and Mac/Linux users)
+Quickly, you can get connection instructions in the AWS dashboard for your EC2 instance. Starting from the AWS console hompage:
+* In the top left, click "Services"
+        * If you see "History" on the left, click "EC2"
+* Under "All AWS Services", hover over "Compute"
+* Click "EC2"
+* In the left hand menu, click "Instances" under "INSTANCES"
+* Between the "Launch Instance"  and "Actions" buttons, click "Connect"
+
+This page has instructions to connect to your EC2 instance.  If you are a Mac/Linux user (what else would you use), you can just cut and paste the commands, remembering to modify the path to your **.pem* file.
+
+Here are some instructions for Windows and Mac/Linux users separately.
+        
+
+####FOR WINDOWS: Set up putty in order to SSH into your EC2 instance (for newbies, "SSH into" basically means connect to your instance remotely).  
   In order to connect to your EC2 instance from a windows system, please follow [this guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html)
   
   
-    
 ####FOR UNIX (MAC or LINUX): SSH into your EC2 instance from the Terminal command line
   In order to connect to your EC2 instance from a UNIX system, please follow [this guide](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html)
   
@@ -206,5 +219,6 @@ Next, you can begin to install some tools to analyze the twitter data you just d
   pip install qtconsole
   pip install ipython
   pip install notebook
+  pip install nltk
 
 ```
