@@ -1,9 +1,8 @@
-#Import twitter api packages
 from tweepy.streaming import StreamListener
-from tweepy import OAuthHandler, Stream
-#Import AWS SDKs
-import boto3, botocore
-#Import standard packages
+from tweepy import OAuthHandler
+from tweepy import Stream
+import boto3
+import botocore
 import json, time, sys, os
 
 #Write the access tokens and consumer tokens from your Twitter Appliation in these fields
@@ -65,6 +64,7 @@ class StdListener(StreamListener):
 
 	def on_status(self, status):
 		self.output.write(status + "\n")
+
 		self.counter += 1
 		if (self.counter%200==0):
 			print(self.counter)
@@ -76,6 +76,7 @@ class StdListener(StreamListener):
 			self.fileName = fprefix+'.'+time.strftime('%Y%m%d-%H%M%S')+'.json'
 			self.output = open(self.fileName, 'w') 
 			self.counter = 0
+
 		return
 
 	def on_delete(self, status_id, user_id):
@@ -83,13 +84,10 @@ class StdListener(StreamListener):
 		return
 
 	def on_limit(self, track):
-		#sys.stderr.write("Rate limit on " + track + " tweets\n")
 		raise RateLimit(track)
 
 	def on_error(self, status_code):
-		#sys.stderr.write('Error: ' + str(status_code) + "\n")
 		raise HttpErr(status_code)
-		return False
 
 	def on_timeout(self):
 		sys.stderr.write("Timeout, sleeping for 60 seconds...\n")
@@ -126,8 +124,8 @@ if __name__ == '__main__':
 			backoff_http_error = min(backoff_http_error * 2, 320)
 		except:
 			#Network error, linear back off
-			e = sys.exc_info()[0]
-			print("Error: {0} : Waiting {1} seconds before reconnect".format(e,backoff_network_error))
+			e = sys.exc_info[0]
+			print("Error {0} : Waiting {1} seconds before reconnect".format(e, backoff_network_error))
 			time.sleep(backoff_network_error)
 			backoff_network_error = min(backoff_network_error + 1, 16)
 			continue

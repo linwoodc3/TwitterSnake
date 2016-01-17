@@ -197,7 +197,7 @@ Here are some instructions for Windows and Mac/Linux users separately.
   
 ####Explain running with nohup and how to kill if necesarry
   * If you want to skip the boring explanations, run these commands
-      * `nohup python -u TwitFarm.py` to start your python job in the background. You can close your SSH instance now and the job will still be running.
+      * `nohup python -u TwitFarm.py &` to start your python job in the background. You can close your SSH instance now and the job will still be running.
       * `tail -f nohup.out` to monitor any output from the script
       * `kill -9 <pid>` to kill the process
   
@@ -211,6 +211,6 @@ Here are some instructions for Windows and Mac/Linux users separately.
 
   So, we know how to start the job, and we know how to end the job. What about monitoring it, though? That's fairly easy as well. `nohup` by default appends all output to the file **nohup.out**. In order to continuously monitor this, we can run a simple `tail` command using the file flag, i.e. `tail -f nohup.out'. This will give you a continous stream of the script output in your terminal window. 
   
-  **HOWEVER** this will not work if, to start the job, you ran `nohup python TwitFarm.py`. Why is that? It's because python uses a buffered output and, without going to far into what that means, it won't write anything to the output file unless you flush stdout periodically. We can get around this, however, by running python in unbuffered mode. You simply need to pass the `-u` flag when running python to do this, which gives us the end result of `nohup python -u TwitFarm.py`. Now, you can successfully view any output from the script with the `tail -f` command. Enjoy!
+  **HOWEVER** this will not work if, to start the job, you ran `nohup python TwitFarm.py &`. Why is that? It's because python uses a buffered output and, without going to far into what that means, it won't write anything to the output file unless you flush stdout periodically. We can get around this, however, by running python in unbuffered mode. You simply need to pass the `-u` flag when running python to do this, which gives us the end result of `nohup python -u TwitFarm.py &`. Now, you can successfully view any output from the script with the `tail -f` command. Enjoy!
   * If you run the commands as specified, you can close your SSH instance now and you'll be collecting tweets on the EC2 instance indefinitely (unless the program, or EC2 instance,  crashes). 
 
