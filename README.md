@@ -103,7 +103,7 @@ Finally, we need to create an IAM (Identity & Access Management) User so your py
   5. Your AWS CLI is now configured!
 
 #### Install git on your EC2 Insance
-  With AWS CLI configured, and EC2 ready to go, you need to clone this repository to your instance.  First, inside your prompt type:
+  With AWS CLI configured, and EC2 ready to go, you need to clone this repository to your instance. But first, we need *git* on our instance. We follow the [steps from this page](https://www.digitalocean.com/community/tutorials/how-to-install-git-on-ubuntu-14-04):  
   ```python
   sudo apt-get update
   # Wait for this process to finish
