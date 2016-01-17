@@ -105,16 +105,16 @@ Finally, we need to create an IAM (Identity & Access Management) User so your py
 #### Install git on your EC2 Insance
   With AWS CLI configured, and EC2 ready to go, you need to clone this repository to your instance.  First, inside your prompt type:
   ```python
-  $ sudo apt-get update
+  sudo apt-get update
   # Wait for this process to finish
   
-  $ sudo apt-get install git
+  sudo apt-get install git
   # Wait for process to finish
   
- $ git clone https://github.com/Knowa42/TwitterSnake.git
+  git clone https://github.com/Knowa42/TwitterSnake.git
   
   # Switch to the correct directory
-  $ cd TwitterSnake
+  cd TwitterSnake
   ```  
   
   Now you are ready to run pull Twitter data on your EC2 instance.  
