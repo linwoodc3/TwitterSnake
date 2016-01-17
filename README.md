@@ -117,7 +117,7 @@ Finally, we need to create an IAM (Identity & Access Management) User so your py
   cd TwitterSnake
   ```  
   
-  Now you are ready to run pull Twitter data on your EC2 instance.  
+  We're almost ready to pull Twitter data.  We cover more administrative tasks below:  
   
 ####Create python files
   For simplicity's sake, you can simply fetch **TwitFarm.py** from this repository, and it should be able to run in the environment that you have defined (with the changes defined below). Of course, you can always make your own, better program using the resources you've collected and installed on this EC2 instance. You're ready to do whatever you want! (with python, tweepy, and AWS at least). 
