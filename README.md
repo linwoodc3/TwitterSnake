@@ -79,12 +79,12 @@ Finally, we need to create an IAM (Identity & Access Management) User so your py
 
 #### Connecting to your EC2 Instance (different for Windows and Mac/Linux users)
 Quickly, you can get connection instructions in the AWS dashboard for your EC2 instance. Starting from the AWS console hompage:
-* In the top left, click "Services"
-        * If you see "History" on the left, click "EC2"
-* Under "All AWS Services", hover over "Compute"
-* Click "EC2"
-* In the left hand menu, click "Instances" under "INSTANCES"
-* Between the "Launch Instance"  and "Actions" buttons, click "Connect"
+* In the top left, click **"Services"**
+        * If you see "History" on the left, click **"EC2"**
+* Under "All AWS Services", hover over **"Compute"**
+* Click **"EC2"**
+* In the left hand menu, click **"Instances"** under "INSTANCES"
+* Between the "Launch Instance"  and "Actions" buttons, click **"Connect"**
 
 This page has instructions to connect to your EC2 instance.  If you are a Mac/Linux user (what else would you use), you can just cut and paste the commands, remembering to modify the path to your **.pem* file.
 
