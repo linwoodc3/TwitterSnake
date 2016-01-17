@@ -80,6 +80,11 @@ Finally, we need to create an IAM (Identity & Access Management) User so your py
 ####FOR WINDOWS: Set up putty in order to SSH into EC2 instance
   In order to connect to your EC2 instance from a windows system, please follow [this guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html)
   
+  
+    
+####FOR UNIX (MAC or LINUX): SSH into your EC2 instance from the Terminal command line
+  In order to connect to your EC2 instance from a UNIX system, please follow [this guide](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html)
+  
   * Mac or Linux users have a native SSH client.  Get to your command line and enter:
   
  ```python
@@ -87,6 +92,7 @@ Finally, we need to create an IAM (Identity & Access Management) User so your py
   ```
   If your computer does NOT recognize the command, you need to download Putty or some SSH client.  If your computer recognized the command, you should see something like this (from Mac):
   ```python
+  ssh
   usage: ssh [-1246AaCfGgKkMNnqsTtVvXxYy] [-b bind_address] [-c cipher_spec]
            [-D [bind_address:]port] [-E log_file] [-e escape_char]
            [-F configfile] [-I pkcs11] [-i identity_file]
@@ -96,9 +102,6 @@ Finally, we need to create an IAM (Identity & Access Management) User so your py
            [-R [bind_address:]port:host:hostport] [-S ctl_path] [-W host:port]
            [-w local_tun[:remote_tun]] [user@]hostname [command]
     ```
-    
-####FOR UNIX (MAC or LINUX): SSH into your EC2 instance from the Terminal command line
-  In order to connect to your EC2 instance from a UNIX system, please follow [this guide](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html)
 	
 ####Set up your Conda envinronment
    Once you're inside of your EC2 instance, you'll be in control of a simple Ubuntu machine with Anaconda pre-installed. Through these instructions, you'll be able to develop a simple python program to connect to the twitter streaming api. You can read about using Conda [here](http://conda.pydata.org/docs/using/index.html)
