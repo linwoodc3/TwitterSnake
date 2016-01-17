@@ -86,7 +86,7 @@ Quickly, you can get connection instructions in the AWS dashboard for your EC2 i
 * In the left hand menu, click **"Instances"** under "INSTANCES"
 * Between the "Launch Instance"  and "Actions" buttons, click **"Connect"**
 
-This page has instructions to connect to your EC2 instance.  If you are a Mac/Linux user (what else would you use), you can just cut and paste the commands, remembering to modify the path to your **.pem* file.
+This page has instructions to connect to your EC2 instance.  If you are a Mac/Linux user (what else would you use), you can just cut and paste the commands directly into your SSH client, remembering to modify the path to your **.pem* file.
 
 Here are some instructions for Windows and Mac/Linux users separately.
         
