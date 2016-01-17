@@ -208,17 +208,3 @@ Here are some instructions for Windows and Mac/Linux users separately.
   **HOWEVER** this will not work if, to start the job, you ran `nohup python TwitFarm.py`. Why is that? It's because python uses a buffered output and, without going to far into what that means, it won't write anything to the output file unless you flush stdout periodically. We can get around this, however, by running python in unbuffered mode. You simply need to pass the `-u` flag when running python to do this, which gives us the end result of `nohup python -u TwitFarm.py`. Now, you can successfully view any output from the script with the `tail -f` command. Enjoy!
   * If you run the commands as specified, you can close your SSH instance now and you'll be collecting tweets on the EC2 instance indefinitely (unless the program, or EC2 instance,  crashes). 
 
-#### Analysis of Twitter Data
-
-Next, you can begin to install some tools to analyze the twitter data you just downloaded.  First, you will need a few tools.  These steps will install Jupyter notebook on your instance.  Jupyter is a web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text. Read more [here](http://jupyter.org/). The first thing we will do is install the dependencies:
-
-
-```python
-  #Type this line exactly; pyzmq causes lots of problems
-  sudo pip install --upgrade pyzmq
-  pip install qtconsole
-  pip install ipython
-  pip install notebook
-  pip install nltk
-
-```
