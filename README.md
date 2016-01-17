@@ -102,10 +102,32 @@ Finally, we need to create an IAM (Identity & Access Management) User so your py
   4. You don't need to enter anything for Default Output Format, juts hit **Enter**
   5. Your AWS CLI is now configured!
 
+#### Install git on your EC2 Insance
+  With AWS CLI configured, and EC2 ready to go, you need to clone this repository to your instance. But first, we need *git* on our instance. We follow the [steps from this page](https://www.digitalocean.com/community/tutorials/how-to-install-git-on-ubuntu-14-04):  
+  ```python
+  sudo apt-get update
+  # Wait for this process to finish
+  
+  sudo apt-get install git
+  # Wait for process to finish
+  
+  git clone https://github.com/Knowa42/TwitterSnake.git
+  
+  # Switch to the correct directory
+  cd TwitterSnake
+  ```  
+  
+  We're almost ready to pull Twitter data.  We cover more administrative tasks below:  
+  
 ####Create python files
   For simplicity's sake, you can simply fetch **TwitFarm.py** from this repository, and it should be able to run in the environment that you have defined (with the changes defined below). Of course, you can always make your own, better program using the resources you've collected and installed on this EC2 instance. You're ready to do whatever you want! (with python, tweepy, and AWS at least). 
   * To run TwitFarm.py, you need to make the following changed before running it.
   * You need to add in your own Twitter API consumer and access keys in the following section. You'll find these in your twitter developer profile.
+  * To add your credentials, in your prompt type:
+  ```python
+  vim TwitFarm.py
+  ```
+  If you need a refresher or introduction to Vim commands, [visit this page for instructions](https://www.fprintf.net/vimCheatSheet.html).  When you have the file open, make sure to enter your credentials in this section: 
   
   ```python
   #Write the access tokens and consumer tokens from your Twitter Appliation in these fields
@@ -114,7 +136,7 @@ Finally, we need to create an IAM (Identity & Access Management) User so your py
   consumer_key = ""
   consumer_secret = ""
   ```
-  * In the following code sectiond, change the second argument of `self.s3.meta.client.upload_file(self.fileName,'',self.fileName)` to your own S3 bucket's name.
+  * In the following code section, change the second argument of `self.s3.meta.client.upload_file(self.fileName,'',self.fileName)` to your own S3 bucket's name.
 
   ```python 
   def on_status(self, status):
