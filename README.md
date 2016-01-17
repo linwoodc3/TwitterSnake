@@ -125,7 +125,7 @@ Finally, we need to create an IAM (Identity & Access Management) User so your py
   * You need to add in your own Twitter API consumer and access keys in the following section. You'll find these in your twitter developer profile.
   * To add your credentials, in your prompt type:
   ```python
-  $ vim TwitFarm.py
+  vim TwitFarm.py
   ```
   If you need a refresher or introduction to Vim commands, [visit this page for instructions](https://www.fprintf.net/vimCheatSheet.html).  When you have the file open, make sure to enter your credentials in this section: 
   
