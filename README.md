@@ -77,9 +77,12 @@ Finally, we need to create an IAM (Identity & Access Management) User so your py
   12. The only resource we will need to access is your S3 bucket, so search for the **AmazonS3FullAccess** policy and **attach it**
   13. You're done!
 
-####Set up putty in order to SSH into EC2 instance
-  In order to connect to your EC2 instance, please follow [this guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html)
+####FOR WINDOWS: Set up putty in order to SSH into EC2 instance
+  In order to connect to your EC2 instance from a windows system, please follow [this guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html)
   
+####FOR UNIX (MAC or LINUX): SSH into your EC2 instance from the Terminal command line
+	In order to connect to your EC2 instance from a UNIX system, please follow [this guide](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html)
+	
 ####Set up your Conda envinronment
    Once you're inside of your EC2 instance, you'll be in control of a simple Ubuntu machine with Anaconda pre-installed. Through these instructions, you'll be able to develop a simple python program to connect to the twitter streaming api. You can read about using Conda [here](http://conda.pydata.org/docs/using/index.html)
    1. Run the command **conda create --name `<name of your environment>`**
