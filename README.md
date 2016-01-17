@@ -136,7 +136,7 @@ Here are some instructions for Windows and Mac/Linux users separately.
   5. Your AWS CLI is now configured!
 
 #### Install git on your EC2 Insance
-  With AWS CLI configured, and EC2 ready to go, you need to clone this repository to your instance. But first, we need *git* on our instance. We follow the [steps from this page](https://www.digitalocean.com/community/tutorials/how-to-install-git-on-ubuntu-14-04):  
+  With AWS CLI configured, and EC2 ready to go, you need to clone this repository to your instance. But first, we need *git* on our instance. To be clear, we should be typing these commands into your SSH client that is connected to your EC2 instance.  We follow the [steps from this page](https://www.digitalocean.com/community/tutorials/how-to-install-git-on-ubuntu-14-04):  
   ```python
   sudo apt-get update
   # Wait for this process to finish
