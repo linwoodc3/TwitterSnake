@@ -37,7 +37,9 @@ To get started, we need to spin up an EC2 (Elastic Cloud Compute) instance. We w
   5. Using the search bar, search for *anaconda* and select Anaconda on Ubuntu from continuum analytics.
       * It should be named similarly to *anaconda3-2.4.1-on-ubuntu-14.04-lts - ami-1cd89176* 
   6. Select the **t1.micro** instance type
-  9. Launch your new instance!
+  7. Select the **Review and Launch** button
+  8. On this screen, you'll see a warning about improving your instance's security; ignore this for now. 
+  9. Select the **Launch** button. You've created your instance!
   10. From the main EC2 management page, find the **Network & Security** section, and select **Security Groups**
   11. Select **Create new security group**
   12. Name your security group something meaningful, add a description (if you want), and leave the VPC as it defaults
